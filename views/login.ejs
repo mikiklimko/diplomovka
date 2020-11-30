@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mikulas Klimko</title>
+
+    <style>
+
+        h1 {
+			text-align: center;
+			color: #4d4d4d;
+			font-size: 24px;
+            padding: 20px 0 20px 0;
+        }
+
+        form {
+			width: 300px;
+			margin: 0 auto;
+			font-family: Tahoma, Geneva, sans-serif; 
+        }
+        
+        input {
+			width: 100%;
+			padding: 15px;
+			border: 1px solid #dddddd;
+			margin-bottom: 15px;
+			box-sizing:border-box; 
+		}
+		p {
+			width: 100%;
+			padding: 15px;
+			background-color: #535b63;
+			border: 0;
+			box-sizing: border-box;
+			cursor: pointer;
+			font-weight: bold;
+			color: #ffffff;
+		}
+
+
+    </style>
+</head>
+<!--Vytvorenie Prihlasenia-->
+<body> 
+    <h1>Prihlasenie</h1>
+    <h1 id="msg"></h1>
+    <form id="FormSub">
+        <label for="email">Email : </label>
+        <input type="text" placeholder="Email" id="email" name="email"><br>
+        <label for="heslo">Heslo : </label>
+        <input type="password" placeholder="Heslo" id="heslo" name="heslo"><br>
+        <input type="submit" value="Prihlasit sa">
+    </form>
+
+    <script>
+        document.getElementById('FormSub').addEventListener('submit', Send);
+        function Send(e) {
+            e.preventDefault();
+            var email = document.querySelector('#email').value;
+            var pass = document.querySelector('#heslo').value;
+            if(email.length > 1 && pass.length > 1){
+                fetch('/login', {
+                method: 'post',
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                     'Content-type': 'application/json'
+                },
+                body: JSON.stringify({Email: email , Heslo: pass })
+            })
+            .then((res)=>res.json())
+            .then(data =>{
+                if(data.overenie === "true"){
+                    window.open('/dashboard', '_self')
+                }else{
+                    document.getElementById('msg').innerHTML = "Neuspesne";
+                }
+            })
+                       
+            }else{
+            document.getElementById('msg').innerHTML = "Nezadal si heslo a email";
+        }
+    }
+    </script>
+
+</body>
+</html>
