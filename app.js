@@ -5,7 +5,7 @@ const mysql = require('mysql');
 const bcrypt = require('bcrypt');
 const app = express();
 const nodemailer = require('nodemailer');
-
+require('dotenv').config()
 
 
 // parsovanie pre nedefinovany problem s registraciou 
@@ -20,8 +20,8 @@ app.set('views', 'views');
 var transportet = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'DP.Klimko@gmail.com',
-        pass: '12355321'
+        user: process.env.LOG_EMAIL,
+        pass: process.env.LOG_PASS
     }
 });
 
@@ -71,7 +71,7 @@ app.post('/', (req, res) => {
                         }
                         
                         res.cookie("UserInfo", userdata);
-                        res.send("<h1>Email bol poslany </h1>");
+                        res.send("<h1>Email bol poslany </h1>"); //res.json skusit
                         console.log("poslane")
                     }
                 })
