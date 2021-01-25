@@ -15,6 +15,7 @@ app.use(bodyParser.json());
 // views 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
+app.use("/public/style", express.static(__dirname + "/public"));
 
 //email prihlasenie
 var transportet = nodemailer.createTransport({
@@ -34,7 +35,13 @@ const connection = mysql.createConnection({
 });
 //cookie parser
 app.use(cookieParser());
-connection.connect();
+connection.connect( (error) =>{
+    if(error){
+        console.log(error)
+    } else {
+        console.log("Databaza pripojena")
+    }
+});
 
 app.use('/', require('./routes/pages'));
 
@@ -154,7 +161,9 @@ app.post('/login', (req, res) => {
     })
 })
 
-app.listen(5000);
+app.listen(5000, ( ) => {
+    console.log("Server sa spustil na porte 5000");
+});
 
 /*Zoznam uloh:
 Opraviť verifikaciu
