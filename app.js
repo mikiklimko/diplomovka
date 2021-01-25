@@ -36,10 +36,9 @@ const connection = mysql.createConnection({
 app.use(cookieParser());
 connection.connect();
 
+app.use('/', require('./routes/pages'));
 
-app.get('/', (req, res) => {
-    res.render('index');
-});
+
 
 
 
@@ -125,13 +124,7 @@ app.get('/overenie/', (req, res) => {
     })
 })
 
-app.get('/dashboard', (req, res) => {
-    res.render('dashboard');
-})
 
-app.get('/login', (req, res) => {
-    res.render('login');
-})
 // prihlasenie 
 app.post('/login', (req, res) => {
     var email = req.body.Email;
