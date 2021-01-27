@@ -4,70 +4,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/views/styles.css">
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	
+		<link rel="stylesheet" href="/style.css">
+
 
     <title>Mikulas Klimko</title>
-    <style>
-        .alert {
-            opacity: 1;
-            transition: opacity 0.6s;
-            /* 600ms to fade out */
-        }
-
-        h1 {
-            text-align: center;
-            color: #4d4d4d;
-            font-size: 24px;
-            padding: 20px 0 20px 0;
-        }
-
-        form {
-            width: 300px;
-            margin: 0 auto;
-            font-family: Tahoma, Geneva, sans-serif;
-        }
-
-        input {
-            width: 100%;
-            padding: 15px;
-            border: 1px solid #dddddd;
-            margin-bottom: 15px;
-            box-sizing: border-box;
-        }
-
-        p {
-            width: 100%;
-            padding: 15px;
-            background-color: #535b63;
-            border: 0;
-            box-sizing: border-box;
-            cursor: pointer;
-            font-weight: bold;
-            color: #ffffff;
-        }
-    </style>
+    
+       
 </head>
 <!--Vytvorenie registračneho formulára-->
 
 <body>
+
+    <nav>
+        <h4>Mikulas Klimko</h4>
+        <ul>
+            <li><a href="/">Domov</a></li>
+            <li><a href="/login">Prihlasenie</a></li>
+            <li><a href="/index">Registracia</a></li>
+        </ul>
+    </nav>
+
     <h1>Registrácia</h1>
     <h4 id="msg"></h4>
     <form id="FormSub">
         <label for="email">Email: </label>
-        <input type="text" placeholder="Email" id="email" name="email"><br><br>
+        <input type="text" placeholder="Email" id="email" name="email"><br>
 
         <label for="heslo"> Heslo: </label>
-        <input type="password" placeholder="Heslo" id="heslo" name="heslo"><br><br>
+        <input type="password" placeholder="Heslo" id="heslo" name="heslo"><br>
 
         <label for="heslo">Zopakujte Heslo: </label>
         <input type="password" placeholder="Zopakujte Heslo" id="heslo2" name="heslo2"><br>
         <br>
-        <br>
+        
         <input type="submit" value="Registrácia">
         <br>
-        <br>
-        <a class="nav-link" href="/login">Prihlasenie </a>
+        
+        
 
     </form>
 
@@ -92,12 +69,15 @@
                         console.log(data)
                     })
             } else {
-                rdocument.getElementById('msg').innerHTML = "Hesla sa nezhoduju";
+                document.getElementById('msg').innerHTML = "Hesla sa nezhoduju";
             }
 
         }
 
     </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>

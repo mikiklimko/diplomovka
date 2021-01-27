@@ -5,6 +5,7 @@ const mysql = require('mysql');
 const bcrypt = require('bcrypt');
 const app = express();
 const nodemailer = require('nodemailer');
+const expressfileUpload = require('express-fileupload');
 require('dotenv').config()
 
 
@@ -15,7 +16,29 @@ app.use(bodyParser.json());
 // views 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
-app.use("/public/style", express.static(__dirname + "/public"));
+app.use(express.static(__dirname + '/public'));
+
+
+app.use(expressfileUpload());
+
+//nahravanie suboru
+app.use(express.static('public'))
+
+
+app.post('/upload', (req,res) => {
+    if(!req.files || Object.keys(req.files).length === 0) {
+        return res.status(400).send("Nenasiel sa subor");
+    }
+    let uploadFile = req.files.uploadFile;
+
+    uploadFile.mv(`./incoming/${uploadFile.name}`, (err) => {
+        if(err) {
+            console.log(err);
+            res.status(500).send(err);
+        }
+        res.send(`File ${req.files.uploadFile.name} bolo ulozene uspesne`);
+    })
+});
 
 //email prihlasenie
 var transportet = nodemailer.createTransport({
@@ -77,7 +100,8 @@ app.post('/', (req, res) => {
                         }
                         
                         res.cookie("UserInfo", userdata);
-                        res.send("<h1>Email bol poslany </h1>"); //res.json skusit
+                        //res.send("<h1>Email bol poslany </h1>"); //res.json skusit
+                        //res.status(400).send("Email poslany");
                         console.log("poslane")
                     }
                 })
@@ -161,9 +185,13 @@ app.post('/login', (req, res) => {
     })
 })
 
+
 app.listen(5000, ( ) => {
     console.log("Server sa spustil na porte 5000");
 });
+
+
+
 
 /*Zoznam uloh:
 Opraviť verifikaciu
