@@ -82,7 +82,7 @@ app.post('/', (req, res) => {
             from: 'miki.klimko@gmail.com',
             to: `${req.body.Email}`,
             subject: "Overenie uctu",
-            html: `<h1>ODOSLANE SPRAVNE</h1><br> <a href="http://localhost:5000/overenie/?verify=${verify}"> Pre overenie klikny`
+            html: `<h1>ODOSLANE SPRAVNE</h1><br> <a href="http://localhost:5000/overenie/?verify=${verify}"> Pre overenie klikny `
         }
         // ulozenie dat
 
